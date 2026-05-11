@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我们的100天纪念</title>
+    <style>
+        :root {
+            --pink-light: #ffeef2;
+            --pink-mid: #ffb7c5;
+            --pink-dark: #ff85a1;
+            --text-color: #5a5a5a;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: "STHeiti", "Microsoft YaHei", sans-serif;
+            background-color: var(--pink-light);
+            color: var(--text-color);
+            scroll-behavior: smooth;
+        }
+
+        /* 页面基础样式 */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .active { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 心形按钮 */
+        .heart-btn {
+            background: var(--pink-dark);
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(255, 133, 161, 0.4);
+            transition: all 0.3s;
+            margin-top: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .heart-btn:hover { transform: scale(1.05); background: #ff6b81; }
+
+        /* 回忆按钮网格 */
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-width: 900px;
+            margin: 30px 0;
+        }
+
+        .memory-btn {
+            background: white;
+            border: 1.5px solid var(--pink-mid);
+            padding: 15px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            color: var(--text-color);
+        }
+        .memory-btn.visited {
+            background: var(--pink-mid);
+            color: white;
+        }
+
+        /* 详情页内容 */
+        .detail-card {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            line-height: 1.8;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .img-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .img-container img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 结尾专属样式 */
+        .final-footer {
+            display: none;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px dashed var(--pink-mid);
+            text-align: center;
+            width: 100%;
+        }
+
+        .end-title {
+            font-family: "STKaiti", "楷体", serif;
+            font-size: 1.5rem;
+            color: var(--pink-dark);
+            margin-bottom: 20px;
+        }
+
+        .promise-card {
+            background: linear-gradient(135deg, #fff 0%, var(--pink-light) 100%);
+            border: 2px solid var(--pink-mid);
+            padding: 25px;
+            border-radius: 20px;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 133, 161, 0.4); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 15px rgba(255, 133, 161, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 133, 161, 0); }
+        }
+
+        .hide-element { display: none !important; }
+
+        h2 { color: var(--pink-dark); margin-top: 0; }
+        .intro-text { font-size: 1.1rem; max-width: 600px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <!-- 界面 1: 欢迎页 -->
+    <div id="page1" class="page active">
+        <div style="font-size: 4rem; margin-bottom: 20px;">💖</div>
+        <button class="heart-btn" onclick="showPage('page2')">点击查看我们的100天旅程</button>
+    </div>
+
+    <!-- 界面 2: 回忆目录 -->
+    <div id="page2" class="page">
+        <div class="intro-text">
+            宝宝好呀，没想到我们已经共同度过了100个美好而又温馨的日子呢~来看看我们的美好回忆叭~
+        </div>
+        
+        <div class="btn-grid">
+            <button class="memory-btn" onclick="openDetail('start')">一切的起点</button>
+            <button class="memory-btn" onclick="openDetail('first')">我们的第一次</button>
+            <button class="memory-btn" onclick="openDetail('westlake')">西湖畔</button>
+            <button class="memory-btn" onclick="openDetail('cats')">猫馆中</button>
+            <button class="memory-btn" onclick="openDetail('city')">良渚和城市阳台</button>
+            <button class="memory-btn" onclick="openDetail('bridge')">拱宸桥夜</button>
+            <button class="memory-btn" onclick="openDetail('flower')">太子湾花海</button>
+            <button class="memory-btn" onclick="openDetail('song')">千古宋城</button>
+            <button class="memory-btn" onclick="openDetail('xixi')">西溪湿地</button>
+            <button class="memory-btn" onclick="openDetail('anji')">安吉嘉乐比</button>
+        </div>
+
+        <div id="whisper-btn-wrapper" style="display: none;">
+            <button class="heart-btn" style="background: #ff4757;" onclick="openDetail('whisper')">对宝宝的碎碎念</button>
+        </div>
+    </div>
+
+    <!-- 界面 3: 详情页 -->
+    <div id="page-detail" class="page">
+        <div class="detail-card" id="detail-content">
+            <!-- 内容动态填充 -->
+        </div>
+
+        <!-- 结尾页替代方案 -->
+        <div id="final-appendix" class="final-footer">
+            <div class="end-title">—— 🌹 未完待续 🌹 ——</div>
+            <div class="promise-card">
+                <p style="margin:0; font-weight:bold; font-size: 1.2rem;">我们的第 100 天 · 2026</p>
+                <p style="margin:8px 0 0 0; font-size: 0.9rem; color: #888;">愿岁岁常相见，愿日日常相亲</p>
+            </div>
+        </div>
+
+        <button id="back-to-list" class="heart-btn" style="background:#aaa; padding: 10px 25px;" onclick="showPage('page2')">返回回忆列表</button>
+    </div>
+
+    <script>
+        const config = {
+            'start': { title: '一切的起点', text: '当那个羞涩的男孩终于鼓起勇气表达自己的爱时，2月14日便不再是他看别人过节日的一天。“金喵玉勾一相逢，便胜却人间无数，两情若是久长时，携手见朝朝暮暮”', imgs: [1] },
+            'first': { title: '我们的第一次', text: '现在回想起第一次一起出去玩，感觉那时的我真的好拘谨好紧张，紧张到连一句完整的话都很难说出来，两个人就那么沉默地走了好久好久，却也看过了第一场电影，一起吃了第一顿饭，拍了第一张合照，收获了第一份礼物……', imgs: [2, 3] },
+            'westlake': { title: '西湖畔', text: '如果有机会和宝宝再去一次西湖，我会选择划船去湖心岛，我们一起享受着湖风，欣赏沿途风景，聊着当年在这里“三块石头”的小故事，聊着我们当年在此讲述的各色各样的八卦，也要一起对着彼此的课表，看看我可以陪你上哪些课，我们什么时候可以一起玩。谢谢宝宝陪我走过了这么远的路嘻嘻', imgs: [4, 5, 6] },
+            'cats': { title: '猫馆中', text: '“我觉得如果以后我们养猫，这些活都得落在你身上了”我们以后当然要养一只可爱的小猫，我来清理打扫小猫的日常，你来贴贴撸撸亲亲小猫，生活总是能从这样的平淡中收获最美好的诗意呀~', imgs: [7, 8] },
+            'city': { title: '良渚和城市阳台', text: '一句“你挽着我的手吧”让这两个人的手紧紧拉在一起近百天没有松开。城市阳台长椅上的那段时光定是我此生难以忘怀的记忆。两个人在静静坐着，似乎周边的一切都已经黯然失色，只有身边的彼此陪伴。你紧紧贴在我的身上，轻轻向我凑近，试图亲亲（你怎么知道我也试图亲亲）（转头）“怎么啦？”“没事”……钱塘江的浪潮仍在耳边回响，宝宝冰凉的手在“小暖炉”的烘烤之下变得暖暖的，柔柔的，轻轻搭在我的肩上，时不时挪动一下，像调皮的小猫，也像我跃动的心脏', imgs: [9, 10, 11, 12, 13, 14] },
+            'bridge': { title: '拱宸桥夜', text: '那是我第一次亲到宝宝的脸颊，也是我们抱得最久、最紧的一次。那是我们感情升温的关键一晚，我学会了打破冷漠，夸夸宝宝，学会了说很多很多甜甜的话。还记得那天我有很多很多的烦心事，但宝宝总有一种甜甜的魔力，让我忘掉一切不开心，让我专注于当下与眼前人，让我学会了释放自我，去爱我所爱', imgs: [15, 16, 17] },
+            'flower': { title: '太子湾花海', text: '第一次做攻略带宝宝出门，经验不足安排的很不好但是宝宝还是很宽容一直在帮我解决问题呀呜呜，喜欢带宝宝出去玩，也喜欢宝宝带我出去玩耶耶耶。四月的花海好美，喜欢和宝宝一起美丽的花，也喜欢欣赏美丽的宝宝', imgs: [18, 19, 20] },
+            'song': { title: '千古宋城', text: '如果再去一次宋城，如果手机再掉进水里，我还是会直接跳进去把手机捞上来嘿嘿嘿。真想再去一次宋城，一起再看一次宋城千古情，再吃一次神秘烤面筋，再买一根十块钱的烤肠，再陪你玩一次水上游戏', imgs: [21, 22, 23] },
+            'xixi': { title: '西溪湿地', text: 'to tell the truth西溪湿地没有那么美的自然风光，它只是一个小小的小公园，但我们仍然会享受着这次小旅行，因为我身边一直有你陪伴。一方小亭，两个人，听着课，望着景，感受着身边彼此的呼吸', imgs: [24, 25, 26] },
+            'anji': { title: '安吉嘉乐比', text: '这天经历了好多好多，让我不知道该从哪里开始写了嘻嘻。我们第一次一起坐高铁，一点岔子都没有出；我们看了好多好多的演出，共同分享着快乐；我们坐上了刺激的海盗船，你缩在我的怀里激发了我强烈的保护欲；我们体验了漂流，我还不小心把手放到了神秘的地方；我们登上了摩天轮的最高点，但我们的爱永远没有极限；我们互相依偎着体验着有彼此陪伴的安稳的睡眠……', imgs: [27, 28, 29, 30, 31, 32] },
+            'whisper': { title: '对宝宝的碎碎念', text: '这百天，珍贵而美好，细腻而温柔。我们一起上了很多的东方文明史、金融学、微积分习题课，在北4-106度过了无数个夜晚、在银泉足球场的月色中散步、在西操的夕阳下一起奔跑、在火锅店里聊着八卦和人生、在堕落街享受水果们、在麦斯威一起吃肉酱拌面、在宿舍楼下道别、在每个深夜互道晚安、在拥抱时感受着身体的起伏、在偌大的紫金港夜骑、或是出现在北教、基图下的小角落享受二人世界。如果有机会，我愿意回到最初的起点，在那个深夜重新发出或是更大胆地发出那份文艺作品，在第一次出去玩的时候和你贴的近一点说的话多一点，在一起上课或是学习时偷偷把手放到你的腿上，在你偷拍我的时候假装没有发现偷偷憋笑，在平凡的日子里多一些惊喜，在温柔的时光里多一些陪伴。或许这过去的百天有很多很多的遗憾，不过我永远相信命运安排的一切都是最美好的。未来我们仍然会走过很多很多的百天，也相信每个百天我们都能以真心相伴，共度春秋。曾经那个青涩的男孩在“假装”成熟稳重的过程中真的变得越来越成熟稳重，那个女孩有被照顾得很好嘛嘻嘻？\n\n（宝宝，如果你看完了，就抬头亲我一下吧！）', imgs: [] }
+        };
+
+        let clickedKeys = new Set();
+        const totalStandardKeys = 10;
+
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function openDetail(key) {
+            const data = config[key];
+            const container = document.getElementById('detail-content');
+            const appendix = document.getElementById('final-appendix');
+            const backBtn = document.getElementById('back-to-list');
+            
+            let imgHtml = '<div class="img-container">';
+            data.imgs.forEach(num => {
+                imgHtml += `<img src="img/${num}.jpg" onerror="this.style.display='none'">`;
+            });
+            imgHtml += '</div>';
+
+            container.innerHTML = `
+                <h2>${data.title}</h2>
+                <div style="white-space: pre-wrap;">${data.text}</div>
+                ${imgHtml}
+            `;
+
+            // 结尾页逻辑处理
+            if (key === 'whisper') {
+                appendix.style.display = 'block';
+                backBtn.classList.add('hide-element');
+            } else {
+                appendix.style.display = 'none';
+                backBtn.classList.remove('hide-element');
+            }
+
+            showPage('page-detail');
+
+            if (key !== 'whisper') {
+                clickedKeys.add(key);
+                checkStatus();
+            }
+        }
+
+        function checkStatus() {
+            const btns = document.querySelectorAll('.memory-btn');
+            btns.forEach(btn => {
+                for (let key in config) {
+                    if (btn.innerText === config[key].title && clickedKeys.has(key)) {
+                        btn.classList.add('visited');
+                    }
+                }
+            });
+
+            if (clickedKeys.size >= totalStandardKeys) {
+                document.getElementById('whisper-btn-wrapper').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
